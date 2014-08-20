@@ -11,7 +11,8 @@
                  [org.clojure/clojurescript "0.0-2311"]]
   :plugins [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.3"]
-            [com.cemerick/clojurescript.test "0.3.1"]]
+            [com.cemerick/clojurescript.test "0.3.1"]
+            [com.cemerick/austin "0.1.4"]]
 
   :hooks [cljx.hooks leiningen.cljsbuild]
 
