@@ -1,14 +1,14 @@
 # ibm-80
 
-A Clojure library designed to ... well, that part is up to you.
+A sorting machine. 
 
 ## Usage
 
-FIXME
+Visit the web site, load files and sort them.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Mark Simpson <verdammelt@gmail.com>
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
