@@ -4,15 +4,18 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["target/src/clj"]
+  :source-paths ["src/clj" "target/src/clj"]
   :test-paths ["target/test/clj"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2311"]]
   :plugins [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
-            [lein-cljsbuild "1.0.3"]]
+            [lein-cljsbuild "1.0.3"]
+            [lein-ring "0.8.11"]]
 
   :hooks [cljx.hooks leiningen.cljsbuild]
+
+  :ring {:handler ibm-80.app/app}
 
   :cljx 
   {:builds [{:source-paths ["src/cljx"]
