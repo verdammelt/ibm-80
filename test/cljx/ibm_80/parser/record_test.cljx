@@ -11,6 +11,7 @@
        \, "foo,bar"
        \space "foo bar"
        \| "foo|bar"
+       \| "foo | bar"
        nil "foobar"))
 
 (deftest parsing-comma-delimited-string
@@ -22,7 +23,6 @@
          "Male" :gender
          "Tan" :favorite-color
          "2/13/1943" :date-of-birth)))
-
 
 (deftest parsing-unknown-delimeter-string
   (is (thrown-with-msg? 
@@ -40,3 +40,14 @@
          "F" :gender
          "Red" :favorite-color
          "6-3-1975" :date-of-birth)))
+
+(deftest parsing-pipe-delimited-string
+  (let [test-string "Smith | Steve | D | M | Red | 3-3-1985"
+        record (parse-string test-string)]
+    (are [expected key] (= expected (get record key))
+         "Smith" :last-name
+         "Steve" :first-name
+         "D" :middle-initial
+         "M" :gender
+         "Red" :favorite-color
+         "3-3-1985" :date-of-birth)))
