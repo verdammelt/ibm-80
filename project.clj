@@ -9,7 +9,8 @@
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2311"]
-                 [enfocus "2.1.0"]]
+                 [enfocus "2.1.0"]
+                 [ring/ring-json "0.3.1"]]
   :plugins [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.3"]
             [lein-ring "0.8.11"]]
