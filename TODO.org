@@ -1,0 +1,23 @@
+* DONE [X] MVP#1: Demonstrate a piece of shared code running on the client and the server.
+- [X] Dummy Page
+- [X] Call CLJS on button click
+- [X] Radio button to choose server/client processing
+- [X] Call client or server code according to user choice
+
+* TODO MVP#2: Parsing/normalizing lines of data
+- [ ] Read comma delimited strings
+- [ ] Read space delimited strings
+- [ ] Read pipe delimited strings
+
+* TODO MVP#3: Processing a file
+
+* TODO MVP#4: Processing multiple files
+
+* TODO MVP#5: Sorting the data.
+
+* MISC:
+- if JS is turned off process with form submit
+- jar file
+- landing page vs. about page vs. sorting page
+- how to make extensible.
+ 
