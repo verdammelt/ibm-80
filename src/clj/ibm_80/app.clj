@@ -3,11 +3,12 @@
             [compojure.route :refer [resources not-found]]
             [compojure.handler :refer [site]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [ring.util.response :refer [redirect response]]))
+            [ring.util.response :refer [redirect response]]
+            [ibm-80.parser.record :refer [guess-delimeter]]))
 
 
 (defroutes sort-routes
-  (POST "/" {body :body} (response {:recvd (body "testString")})))
+  (POST "/" {body :body} (response {:delimiter (str (guess-delimeter (body "testString")))})))
 
 (defroutes app-routes
   (GET "/" []  (redirect "index.html"))
