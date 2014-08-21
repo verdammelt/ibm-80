@@ -27,8 +27,8 @@
 
   :cljsbuild
   {:builds {:dev
-            {:source-paths ["target/src/cljs"]
-             :compiler {:output-to "resources/public/js/ibm80.js"
+            {:source-paths ["src/cljs" "target/src/cljs"]
+             :compiler {:output-to "resources/public/js/ibm_80.js"
                         :optimizations :whitespace
                         :pretty-print true}}
             }})

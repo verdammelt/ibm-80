@@ -13,9 +13,9 @@
   :cljsbuild 
   {:builds {:dev-test
             {:source-paths ["target/test/cljs"]
-             :compiler {:output-to "target/test/js/ibm80-test.js"
+             :compiler {:output-to "target/test/js/ibm_80-test.js"
                         :optimizations :whitespace
                         :pretty-print true}}}
    :test-commands {"dev"
                    ["phantomjs" 
-                    :runner "target/test/js/ibm80-test.js"]}}}}
+                    :runner "target/test/js/ibm_80-test.js"]}}}}
