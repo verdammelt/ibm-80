@@ -19,7 +19,7 @@
                    (guess-delimeter (:testString data))) ))
 
 (defn- process-on-server [data]
-  (POST "http://localhost:3000/sortblah" 
+  (POST "/sort" 
         {:format :json
          :params data
          :error-handler #(display-message (str "An error occurred: " %))

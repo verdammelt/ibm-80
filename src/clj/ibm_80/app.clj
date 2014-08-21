@@ -16,7 +16,18 @@
   (resources "/")
   (not-found "What'chyu talking about Willis?!"))
 
+;; not a great thing - but good enough for now.
+(defn simple-logging-middleware [app]
+  (fn [req]
+    (let [now (java.util.Date.)]
+      (println (format "%s:INFO:%s - %s" 
+                       (str now)        ; not a great format.
+                       (:request-method req)
+                       (:uri req))))
+    (app req)))
+
 (def app
   (-> (site app-routes)
+     simple-logging-middleware
      (wrap-json-body)
      (wrap-json-response)))
