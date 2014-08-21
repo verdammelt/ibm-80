@@ -4,9 +4,9 @@
 (defn guess-delimeter [str]
   (some #{\space \, \|} str))
 
-(defn parse-string [data-line]
-  (let [delimiter (guess-delimeter data-line)
-        split-string (string/split data-line (re-pattern (str delimiter)))]
+(defmulti parse-string guess-delimeter)
+(defmethod parse-string \, [s]
+  (let [split-string (string/split s #",")]
     {:last-name (string/trim (get split-string 0))
      :first-name (string/trim (get split-string 1))
      :gender (string/trim (get split-string 2))
