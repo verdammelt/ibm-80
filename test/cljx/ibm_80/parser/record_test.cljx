@@ -22,8 +22,21 @@
          "Male" :gender
          "Tan" :favorite-color
          "2/13/1943" :date-of-birth)))
+
+
 (deftest parsing-unknown-delimeter-string
   (is (thrown-with-msg? 
        #+clj Exception #+cljs js/Error
        #"unknown data format"
        (parse-string "Abercrombie:Neil:Male:Tan:2/13/1943"))))
+
+(deftest parsing-space-delimited-string
+  (let [test-string "Kournikova Anna F F 6-3-1975 Red"
+        record (parse-string test-string)]
+    (are [expected key] (= expected (get record key))
+         "Kournikova" :last-name
+         "Anna" :first-name
+         "F" :middle-initial
+         "F" :gender
+         "Red" :favorite-color
+         "6-3-1975" :date-of-birth)))
