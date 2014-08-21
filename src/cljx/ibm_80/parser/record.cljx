@@ -5,6 +5,8 @@
   (some #{\space \, \|} str))
 
 (defmulti parse-string guess-delimeter)
+(defmethod parse-string :default [s]
+  (throw (#+clj Exception. #+cljs js/Error. "unknown data format")))
 (defmethod parse-string \, [s]
   (let [split-string (string/split s #",")]
     {:last-name (string/trim (get split-string 0))

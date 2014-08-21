@@ -22,3 +22,8 @@
          "Male" :gender
          "Tan" :favorite-color
          "2/13/1943" :date-of-birth)))
+(deftest parsing-unknown-delimeter-string
+  (is (thrown-with-msg? 
+       #+clj Exception #+cljs js/Error
+       #"unknown data format"
+       (parse-string "Abercrombie:Neil:Male:Tan:2/13/1943"))))
