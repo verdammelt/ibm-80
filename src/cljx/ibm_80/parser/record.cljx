@@ -12,25 +12,17 @@
 (defmethod parse-string :default [s]
   (throw (#+clj Exception. #+cljs js/Error. "unknown data format")))
 (defmethod parse-string \, [s]
-  (let [split-string (split-and-trim s #",")]
-    {:last-name (nth split-string 0)
-     :first-name (nth split-string 1)
-     :gender (nth split-string 2)
-     :favorite-color (nth split-string 3)
-     :date-of-birth (nth split-string 4)}))
+  (apply hash-map
+         (interleave 
+          [:last-name :first-name :gender :favorite-color :date-of-birth]
+          (split-and-trim s #","))))
 (defmethod parse-string \space [s]
-  (let [split-string (split-and-trim s #" ")]
-    {:last-name (nth split-string 0)
-     :first-name (nth split-string 1)
-     :middle-initial (nth split-string 2)
-     :gender (nth split-string 3)
-     :date-of-birth (nth split-string 4)
-     :favorite-color (nth split-string 5)}))
+  (apply hash-map
+         (interleave
+          [:last-name :first-name :middle-initial :gender :date-of-birth :favorite-color]
+          (split-and-trim s #" "))))
 (defmethod parse-string \| [s]
-    (let [split-string (split-and-trim s #"\|")]
-      {:last-name (nth split-string 0)
-       :first-name (nth split-string 1)
-       :middle-initial (nth split-string 2)
-       :gender (nth split-string 3)
-       :favorite-color (nth split-string 4)
-       :date-of-birth (nth split-string 5)}))
+  (apply hash-map
+         (interleave
+          [:last-name :first-name :middle-initial :gender :favorite-color :date-of-birth]
+          (split-and-trim s #"\|"))))
