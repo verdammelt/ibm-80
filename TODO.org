@@ -5,9 +5,12 @@
 - [X] Call client or server code according to user choice
 
 * TODO MVP#2: Parsing/normalizing lines of data
-- [ ] Read comma delimited strings
-- [ ] Read space delimited strings
-- [ ] Read pipe delimited strings
+- [X] Read comma delimited strings
+- [X] Read space delimited strings
+- [X] Read pipe delimited strings
+- [ ] error if number of fields is wrong.
+- [ ] Normalize data such as gender & date.
+- [ ] error if 'type' of field is wrong.
 
 * TODO MVP#3: Processing a file
 
@@ -16,6 +19,10 @@
 * TODO MVP#5: Sorting the data.
 
 * MISC:
+- smooth rough edges of environment
+  - source maps
+  - compilation speed
+  - repl-ing.
 - if JS is turned off process with form submit
 - jar file
 - landing page vs. about page vs. sorting page
