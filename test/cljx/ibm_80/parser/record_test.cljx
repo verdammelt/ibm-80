@@ -1,8 +1,8 @@
 (ns ibm-80.parser.record-test
   #+cljs
-  (:require-macros [cemerick.cljs.test :refer [deftest testing is are]])
+  (:require-macros [cemerick.cljs.test :refer [deftest testing is are assert-expr]])
   (:require
-   #+clj [clojure.test :refer [deftest testing is are]]
+   #+clj [clojure.test :refer [deftest testing is are assert-expr]]
    #+cljs [cemerick.cljs.test :as t]
    [ibm-80.parser.record :refer [guess-delimeter parse-string]]))
 
@@ -30,6 +30,19 @@
          :gender "Male"
          :favorite-color "Tan"
          :date-of-birth "2/13/1943")))
+
+(defmethod assert-expr 'invalid-input? [msg form]
+  (assert-expr msg (conj (rest form)
+                         #"invalid format"
+                         #+clj Exception
+                         #+cljs js/Error
+                         'thrown-with-msg?)))
+
+(deftest comma-delimited-string-must-have-five-fields
+  (are [e] (invalid-input? (parse-string e))
+       "Abercrombie,Neil,Male"
+       "Abercrombie, Neil, Male, Tan, 2/13/1943,other"
+       ))
 
 (deftest parsing-space-delimited-string
   (let [test-string "Kournikova Anna F F 6-3-1975 Red"
