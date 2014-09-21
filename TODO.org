@@ -8,7 +8,7 @@
 - [X] Read comma delimited strings
 - [X] Read space delimited strings
 - [X] Read pipe delimited strings
-- [ ] error if number of fields is wrong.
+- [X] error if number of fields is wrong.
 - [ ] Normalize data such as gender & date.
 - [ ] error if 'type' of field is wrong.
 

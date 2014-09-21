@@ -10,30 +10,29 @@
 
 (defn- validate-length [n record]
   (if (not (= n (count record)))
-    (throw (#+clj Exception. #+cljs js/Error. "invalid format"))
+    (throw (#+clj Exception. #+cljs js/Error.
+                  "incorrect number of fields"))
     record))
+
+(defn- string->record [s delimiter fields]
+  (apply hash-map
+         (interleave fields
+                     (validate-length (count fields)
+                                      (split-and-trim s delimiter)))))
 
 (defmulti parse-string guess-delimeter)
 (defmethod parse-string :default [s]
   (throw (#+clj Exception. #+cljs js/Error. "unknown data format")))
 (defmethod parse-string \, [s]
-  (apply hash-map
-         (interleave
-          [:last-name :first-name
-           :gender
-           :favorite-color :date-of-birth]
-          (validate-length 5 (split-and-trim s #",")))))
+  (string->record s #","
+                  [:last-name :first-name
+                   :gender :favorite-color :date-of-birth]))
 (defmethod parse-string \space [s]
-  (apply hash-map
-         (interleave
-          [:last-name :first-name :middle-initial
-           :gender
-           :date-of-birth :favorite-color]
-          (split-and-trim s #" "))))
+  (string->record s #" "
+                  [:last-name :first-name :middle-initial
+                   :gender :date-of-birth :favorite-color]))
 (defmethod parse-string \| [s]
-  (apply hash-map
-         (interleave
-          [:last-name :first-name :middle-initial
-           :gender
-           :favorite-color :date-of-birth]
-          (split-and-trim s #"\|"))))
+  (string->record s #"\|"
+                  [:last-name :first-name :middle-initial
+                   :gender
+                   :favorite-color :date-of-birth]))

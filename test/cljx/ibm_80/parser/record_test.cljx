@@ -31,19 +31,6 @@
          :favorite-color "Tan"
          :date-of-birth "2/13/1943")))
 
-(defmethod assert-expr 'invalid-input? [msg form]
-  (assert-expr msg (conj (rest form)
-                         #"invalid format"
-                         #+clj Exception
-                         #+cljs js/Error
-                         'thrown-with-msg?)))
-
-(deftest comma-delimited-string-must-have-five-fields
-  (are [e] (invalid-input? (parse-string e))
-       "Abercrombie,Neil,Male"
-       "Abercrombie, Neil, Male, Tan, 2/13/1943,other"
-       ))
-
 (deftest parsing-space-delimited-string
   (let [test-string "Kournikova Anna F F 6-3-1975 Red"
         record (parse-string test-string)]
@@ -65,3 +52,21 @@
          :gender "M"
          :favorite-color "Red"
          :date-of-birth "3-3-1985")))
+
+(defmethod assert-expr 'invalid-input? [msg form]
+  (assert-expr msg (conj (rest form)
+                         #"incorrect number of fields"
+                         #+clj Exception
+                         #+cljs js/Error
+                         'thrown-with-msg?)))
+
+
+(deftest validates-that-string-has-correct-number-of-fields
+  (are [e] (invalid-input? (parse-string e))
+       "Abercrombie,Neil,Male"
+       "Abercrombie, Neil, Male, Tan, 2/13/1943,other"
+       "Kournikova Anna F F 6-3-1975"
+       "Kournikova Anna F F 6-3-1975 Red other"
+       "Smith | Steve | D | M | Red"
+       "Smith | Steve | D | M | Red | 3-3-1985 | other"
+       ))
