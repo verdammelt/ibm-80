@@ -13,7 +13,9 @@
   :cljsbuild 
   {:builds {:dev-test
             {:source-paths ["target/test/cljs"]
-             :compiler {:output-to "target/test/js/ibm_80-test.js"
+             :compiler {:output-dir "target/test/js"
+                        :output-to "target/test/js/ibm_80-test.js"
+                        :source-map "target/test/js/ibm_80-test.js.map"
                         :optimizations :whitespace
                         :pretty-print true}}}
    :test-commands {"dev"

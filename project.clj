@@ -31,7 +31,9 @@
   :cljsbuild
   {:builds {:dev
             {:source-paths ["src/cljs" "target/src/cljs"]
-             :compiler {:output-to "resources/public/js/ibm_80.js"
+             :compiler {:output-dir "resources/public/js"
+                        :output-to "resources/public/js/ibm_80.js"
+                        :source-map "resources/public/js/ibm_80.js.map"
                         :optimizations :whitespace
                         :pretty-print true}}
             }})

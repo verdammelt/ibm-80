@@ -20,7 +20,7 @@
 
 * MISC:
 - smooth rough edges of environment
-  - source maps
+  - +source maps+
   - compilation speed
   - repl-ing.
 - if JS is turned off process with form submit
