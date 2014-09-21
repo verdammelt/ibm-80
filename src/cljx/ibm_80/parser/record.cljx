@@ -13,16 +13,22 @@
   (throw (#+clj Exception. #+cljs js/Error. "unknown data format")))
 (defmethod parse-string \, [s]
   (apply hash-map
-         (interleave 
-          [:last-name :first-name :gender :favorite-color :date-of-birth]
+         (interleave
+          [:last-name :first-name
+           :gender
+           :favorite-color :date-of-birth]
           (split-and-trim s #","))))
 (defmethod parse-string \space [s]
   (apply hash-map
          (interleave
-          [:last-name :first-name :middle-initial :gender :date-of-birth :favorite-color]
+          [:last-name :first-name :middle-initial
+           :gender
+           :date-of-birth :favorite-color]
           (split-and-trim s #" "))))
 (defmethod parse-string \| [s]
   (apply hash-map
          (interleave
-          [:last-name :first-name :middle-initial :gender :favorite-color :date-of-birth]
+          [:last-name :first-name :middle-initial
+           :gender
+           :favorite-color :date-of-birth]
           (split-and-trim s #"\|"))))

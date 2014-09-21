@@ -1,7 +1,7 @@
 (ns ibm-80.parser.record-test
   #+cljs
   (:require-macros [cemerick.cljs.test :refer [deftest testing is are]])
-  (:require 
+  (:require
    #+clj [clojure.test :refer [deftest testing is are]]
    #+cljs [cemerick.cljs.test :as t]
    [ibm-80.parser.record :refer [guess-delimeter parse-string]]))
@@ -15,8 +15,9 @@
        nil "foobar"))
 
 (deftest parsing-unknown-delimeter-string
-  (is (thrown-with-msg? 
-       #+clj Exception #+cljs js/Error
+  (is (thrown-with-msg?
+       #+clj Exception
+       #+cljs js/Error
        #"unknown data format"
        (parse-string "Abercrombie:Neil:Male:Tan:2/13/1943"))))
 

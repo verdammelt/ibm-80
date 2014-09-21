@@ -8,7 +8,9 @@
 
 
 (defroutes sort-routes
-  (POST "/" {body :body} (response {:delimiter (str (guess-delimeter (body "testString")))})))
+  (POST "/" {body :body}
+        (response
+         {:delimiter (str (guess-delimeter (body "testString")))})))
 
 (defroutes app-routes
   (GET "/" []  (redirect "index.html"))
@@ -20,7 +22,7 @@
 (defn simple-logging-middleware [app]
   (fn [req]
     (let [now (java.util.Date.)]
-      (println (format "%s:INFO:%s - %s" 
+      (println (format "%s:INFO:%s - %s"
                        (str now)        ; not a great format.
                        (:request-method req)
                        (:uri req))))
