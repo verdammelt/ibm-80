@@ -29,7 +29,7 @@
          :first-name "Neil"
          :gender "Male"
          :favorite-color "Tan"
-         :date-of-birth "2/13/1943")))
+         :date-of-birth [1943 2 13])))
 
 (deftest parsing-space-delimited-string
   (let [test-string "Kournikova Anna F F 6-3-1975 Red"
@@ -40,7 +40,7 @@
          :middle-initial "F"
          :gender "F"
          :favorite-color "Red"
-         :date-of-birth "6-3-1975")))
+         :date-of-birth [1975 6 3])))
 
 (deftest parsing-pipe-delimited-string
   (let [test-string "Smith | Steve | D | M | Red | 3-3-1985"
@@ -51,7 +51,7 @@
          :middle-initial "D"
          :gender "M"
          :favorite-color "Red"
-         :date-of-birth "3-3-1985")))
+         :date-of-birth [1985 3 3])))
 
 (defmethod assert-expr 'invalid-input? [msg form]
   (assert-expr msg (conj (rest form)
@@ -62,7 +62,7 @@
 
 
 (deftest validates-that-string-has-correct-number-of-fields
-  (are [e] (invalid-input? (parse-string e))
+  (are [s] (invalid-input? (parse-string s))
        "Abercrombie,Neil,Male"
        "Abercrombie, Neil, Male, Tan, 2/13/1943,other"
        "Kournikova Anna F F 6-3-1975"

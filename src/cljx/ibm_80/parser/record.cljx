@@ -14,11 +14,20 @@
                   "incorrect number of fields"))
     record))
 
+(defn- parse-integer [s]
+  (#+clj Integer/parseInt #+cljs js/parseInt s))
+
+(defn- normalize-date [record]
+  (let [date (map parse-integer (string/split (:date-of-birth record) #"[/-]"))]
+    (assoc record :date-of-birth [(nth date 2) (nth date 0) (nth date 1)]))
+  )
+
 (defn- string->record [s delimiter fields]
-  (apply hash-map
-         (interleave fields
-                     (validate-length (count fields)
-                                      (split-and-trim s delimiter)))))
+  (normalize-date 
+   (apply hash-map
+          (interleave fields
+                      (validate-length (count fields)
+                                       (split-and-trim s delimiter))))))
 
 (defmulti parse-string guess-delimeter)
 (defmethod parse-string :default [s]
