@@ -10,6 +10,8 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2342"]
                  [enfocus "2.1.0"]
+                 [compojure "1.1.8"]
+                 [ring "1.2.1"]
                  [ring/ring-json "0.3.1"]
                  [cljs-ajax "0.3.0"]]
   :plugins [[com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]
