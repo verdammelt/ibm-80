@@ -28,12 +28,13 @@
            \m "Male")))
 
 (defn- string->record [s delimiter fields]
-  (normalize-gender
-   (normalize-date
-    (apply hash-map
-           (interleave fields
-                       (validate-length (count fields)
-                                        (split-and-trim s delimiter)))))))
+  (->> delimiter
+       (split-and-trim s)
+       (validate-length (count fields))
+       (interleave fields)
+       (apply hash-map)
+       normalize-date
+       normalize-gender))
 
 (defmulti parse-string guess-delimeter)
 (defmethod parse-string :default [s]
