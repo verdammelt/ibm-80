@@ -38,7 +38,7 @@
          :last-name "Kournikova"
          :first-name "Anna"
          :middle-initial "F"
-         :gender "F"
+         :gender "Female"
          :favorite-color "Red"
          :date-of-birth [1975 6 3])))
 
@@ -49,7 +49,7 @@
          :last-name "Smith"
          :first-name "Steve"
          :middle-initial "D"
-         :gender "M"
+         :gender "Male"
          :favorite-color "Red"
          :date-of-birth [1985 3 3])))
 
@@ -59,7 +59,6 @@
                          #+clj Exception
                          #+cljs js/Error
                          'thrown-with-msg?)))
-
 
 (deftest validates-that-string-has-correct-number-of-fields
   (are [s] (invalid-input? (parse-string s))
