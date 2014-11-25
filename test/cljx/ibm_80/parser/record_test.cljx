@@ -53,15 +53,22 @@
          :favorite-color "Red"
          :date-of-birth [1985 3 3])))
 
-(defmethod assert-expr 'invalid-input? [msg form]
+(defmethod assert-expr 'invalid-number-of-fields? [msg form]
   (assert-expr msg (conj (rest form)
                          #"incorrect number of fields"
                          #+clj Exception
                          #+cljs js/Error
                          'thrown-with-msg?)))
 
+(defmethod assert-expr 'invalid-gender? [msg form]
+  (assert-expr msg (conj (rest form)
+                         #"incorrect gender"
+                         #+clj Exception
+                         #+cljs js/Error
+                         'thrown-with-msg?)))
+
 (deftest validates-that-string-has-correct-number-of-fields
-  (are [s] (invalid-input? (parse-string s))
+  (are [s] (invalid-number-of-fields? (parse-string s))
        "Abercrombie,Neil,Male"
        "Abercrombie, Neil, Male, Tan, 2/13/1943,other"
        "Kournikova Anna F F 6-3-1975"
@@ -69,3 +76,7 @@
        "Smith | Steve | D | M | Red"
        "Smith | Steve | D | M | Red | 3-3-1985 | other"
        ))
+
+(deftest validates-gender
+  (is (invalid-gender?
+       (parse-string "Smith | Steve | D | W | Red | 3-3-1985"))))

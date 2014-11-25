@@ -5,13 +5,16 @@
   (or (some #{\, \|} str)
      (some #{\space} str)))
 
+(defn- throw-exception [msg]
+  (throw (#+clj Exception. #+cljs js/Error.
+                    msg)))
+
 (defn- split-and-trim [str delimiter]
   (map string/trim (string/split str delimiter)))
 
 (defn- validate-length [n record]
   (if (not (= n (count record)))
-    (throw (#+clj Exception. #+cljs js/Error.
-                  "incorrect number of fields"))
+    (throw-exception "incorrect number of fields")
     record))
 
 (defn- parse-integer [s]
@@ -25,7 +28,8 @@
   (assoc record :gender
          (case (first (string/lower-case (:gender record)))
            \f "Female"
-           \m "Male")))
+           \m "Male"
+           (throw-exception "incorrect gender"))))
 
 (defn- string->record [s delimiter fields]
   (->> delimiter
